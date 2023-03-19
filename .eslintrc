@@ -1,3 +1,4 @@
+// See eslint.org
 {
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -9,17 +10,36 @@
     "project": "./tsconfig.json"
   },
   "plugins": ["@typescript-eslint/eslint-plugin"],
+
+  // Inside "extends" are existing configurations that cover many common situations, ot avoid writting inside "rules"
+  // "strict" is still needed
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "eslint-config-prettier",
+    "eslint-config-prettier", // This puts in consonance Prettier with ESLint
     "eslint-config-prettier/@typescript-eslint"
   ],
   "rules": {
-    "strict": ["error", "never"]
+    "strict": ["error", "never"] // Never check for 'useStrict' in js (Babel does it for us)
   },
   "env": {
-    "browser": true
-  }
+    "browser": true // Set commands as "console" available in the code and they can print in the browser
+  },
+  "overrides": [
+    {    "files": "**/*.+(ts|tsx)",
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "plugins": ["@typescript-eslint/eslint-plugin"],
+    // Inside "extends" are existing configurations that cover many common situations, ot avoid writting inside "rules"
+    // "strict" is still needed
+    "extends": [
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "eslint-config-prettier/@typescript-eslint"
+    ]
+    }      
+  ]
 }
